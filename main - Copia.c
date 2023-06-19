@@ -1,12 +1,12 @@
-#include <stdio.h>  // Biblioteca para trabalhar com funï¿½ï¿½es de entrada e saï¿½da
-#include <stdlib.h> // Biblioteca para trabalhar com funï¿½ï¿½es de sistema
-#include <locale.h> // Biblioteca para trabalhar com acentuaï¿½ï¿½o
-#include <stdarg.h> // Biblioteca para trabalhar com funï¿½ï¿½es que recebem um nï¿½mero variï¿½vel de argumentos
-#include <ctype.h>  // Biblioteca para trabalhar com funï¿½ï¿½es de caracteres
+#include <stdio.h>  // Biblioteca para trabalhar com funções de entrada e saída
+#include <stdlib.h> // Biblioteca para trabalhar com funções de sistema
+#include <locale.h> // Biblioteca para trabalhar com acentuação
+#include <stdarg.h> // Biblioteca para trabalhar com funções que recebem um número variável de argumentos
+#include <ctype.h>  // Biblioteca para trabalhar com funções de caracteres
 
-// SEï¿½ï¿½O: FUNï¿½ï¿½ES DE FERRAMENTAS
+// SEÇÃO: FUNÇÕES DE FERRAMENTAS
 
-// Recebe um nï¿½mero inteiro digitado pelo usuï¿½rio
+// Recebe um número inteiro digitado pelo usuário
 int getNumber()
 {
   char entrada[100];
@@ -14,25 +14,23 @@ int getNumber()
 
   do
   {
-    printf("Selecione uma opï¿½ï¿½o: ");
+    printf("Selecione uma opção: ");
     setbuf(stdin, NULL);
     fgets(entrada, sizeof(entrada), stdin);
 
     if (sscanf(entrada, " %d", &numero) != 1)
     {
-      printf("Entrada invï¿½lida. Digite um nï¿½mero.\n");
+      printf("Entrada inválida. Digite um número.\n");
     }
   } while (sscanf(entrada, "%d", &numero) != 1);
 
   return numero;
 }
 
-void finishMenu()
-{
-  int option;
-  do
+void finishMenu() {
+do
   {
-    printf("\n\nO que vocï¿½ quer fazer agora?\n1 - Voltar ao menu principal\n2 - Sair\n");
+    printf("O que você quer fazer agora?\n1 - Voltar ao menu principal\n2 - Sair\n");
     scanf("%d", &option);
 
     switch (option)
@@ -46,14 +44,13 @@ void finishMenu()
     if (option < 1 || option > 2)
     {
       system("CLS");
-      printf("Digite uma opï¿½ï¿½o vï¿½lida! Tente novamente: \n");
+      printf("Digite uma opção válida! Tente novamente: \n");
     }
   } while (option < 1 || option > 2);
 }
+// SEÇÃO FUNÇÕES DE MANIPULAÇÃO DE ARQUIVOS
 
-// SEï¿½ï¿½O FUNï¿½ï¿½ES DE MANIPULAï¿½ï¿½O DE ARQUIVOS
-
-// Adiciona um valor ao arquivo de histï¿½rico
+// Adiciona um valor ao arquivo de histórico
 void addValueToHistory(const char *format, ...)
 {
   va_list arguments;
@@ -62,19 +59,19 @@ void addValueToHistory(const char *format, ...)
   FILE *arquivo = fopen("history.txt", "a+"); // Abre o arquivo no modo "append" (adicionar)
   if (arquivo == NULL)
   {
-    printf("Erro ao abrir o arquivo de saï¿½da.\n");
+    printf("Erro ao abrir o arquivo de saída.\n");
     va_end(arguments);
     return;
   }
 
-  vfprintf(arquivo, format, arguments); // Escreve no arquivo de saï¿½da
+  vfprintf(arquivo, format, arguments); // Escreve no arquivo de saída
   fprintf(arquivo, "\n");               // Adiciona uma quebra de linha no final
 
   fclose(arquivo);   // Fecha o arquivo
   va_end(arguments); // Finaliza a lista de argumentos
 }
 
-// Lï¿½ o arquivo de histï¿½rico e exibe na tela
+// Lê o arquivo de histórico e exibe na tela
 void readHistory()
 {
   FILE *file;
@@ -82,7 +79,7 @@ void readHistory()
 
   if (file == NULL)
   {
-    printf("Nï¿½o hï¿½ valores no histï¿½rico.\n");
+    printf("Não há valores no histórico.\n");
     return;
   }
 
@@ -91,12 +88,12 @@ void readHistory()
 
   if (size == 0)
   {
-    printf("O histï¿½rico estï¿½ vazio.\n"); // Exibe uma mensagem caso o arquivo esteja vazio
+    printf("O histórico está vazio.\n"); // Exibe uma mensagem caso o arquivo esteja vazio
     fclose(file);
     return;
   }
 
-  rewind(file); // Move o cursor de volta para o ï¿½nicio do arquivo
+  rewind(file); // Move o cursor de volta para o ínicio do arquivo
 
   char linha[100]; // Buffer para armazenar cada linha do arquivo
 
@@ -108,7 +105,7 @@ void readHistory()
   fclose(file); // Fecha o arquivo
 }
 
-// Apaga o conteï¿½do do arquivo de histï¿½rico
+// Apaga o conteúdo do arquivo de histórico
 void cleanHistory()
 {
   FILE *file;
@@ -116,7 +113,7 @@ void cleanHistory()
 
   if (file == NULL)
   {
-    printf("O histï¿½rico jï¿½ estï¿½ vazio!.\n");
+    printf("O histórico já está vazio!.\n");
     return;
   }
 
@@ -131,16 +128,16 @@ typedef enum
   TIME,
   FORCE,
   VELOCITY,
-} conversions; // Tipos de conversï¿½o
+} conversions; // Tipos de conversão
 
 // Menu principal
 void menu(int *option)
 {
-  printf("1 - Temperatura\n2 - Distï¿½ncia\n3 - Massa\n4 - Tempo\n5 - Forï¿½a\n6 - Velocidade\n\n7 - Histï¿½rico   8 - Sair\n\n");
+  printf("1 - Temperatura\n2 - Distância\n3 - Massa\n4 - Tempo\n5 - Força\n6 - Velocidade\n\n7 - Histórico   8 - Sair\n\n");
   *option = getNumber();
 }
 
-// SEï¿½ï¿½O: CONVERSï¿½O DE UNIDADES DE TEMPERATURA
+// SEÇÃO: CONVERSÃO DE UNIDADES DE TEMPERATURA
 
 typedef enum
 {
@@ -149,9 +146,9 @@ typedef enum
   KELVIN
 } Degrees;
 
-// SEï¿½ï¿½O: CONVERSï¿½O DE UNIDADES DE TEMPO
+// SEÇÃO: CONVERSÃO DE UNIDADES DE TEMPO
 
-// Conversï¿½o de graus celcius para fahrenheit e kelvin
+// Conversão de graus celcius para fahrenheit e kelvin
 float celciusConversions(float initialDegrees, Degrees typeOfResult)
 {
   float finalDegrees;
@@ -167,7 +164,7 @@ float celciusConversions(float initialDegrees, Degrees typeOfResult)
   return finalDegrees;
 }
 
-// Conversï¿½o de graus fahrenheit para celcius e kelvin
+// Conversão de graus fahrenheit para celcius e kelvin
 float fahreheitConversions(float initialDegrees, Degrees typeOfReturn)
 {
   float finalDegrees;
@@ -183,7 +180,7 @@ float fahreheitConversions(float initialDegrees, Degrees typeOfReturn)
   return finalDegrees;
 }
 
-// Conversï¿½o de graus kelvin para celcius e fahrenheit
+// Conversão de graus kelvin para celcius e fahrenheit
 float kelvinConversions(float initialDegrees, Degrees typeOfResult)
 {
   float finalDegrees;
@@ -208,7 +205,7 @@ typedef enum
   DAYS
 } Time;
 
-// Conversï¿½o de segundos para minutos, horas e dias
+// Conversão de segundos para minutos, horas e dias
 float secondsConversions(int seconds, Time typeOfResult)
 {
   float result;
@@ -232,7 +229,7 @@ float secondsConversions(int seconds, Time typeOfResult)
   return result;
 }
 
-// Conversï¿½o de minutos para segundos, horas e dias
+// Conversão de minutos para segundos, horas e dias
 float minutesConversions(int minutes, Time typeOfResult)
 {
   float result;
@@ -256,7 +253,7 @@ float minutesConversions(int minutes, Time typeOfResult)
   return result;
 }
 
-// Conversï¿½o de horas para segundos, minutos e dias
+// Conversão de horas para segundos, minutos e dias
 float hoursConversions(int hours, Time typeOfResult)
 {
   float result;
@@ -280,7 +277,7 @@ float hoursConversions(int hours, Time typeOfResult)
   return result;
 }
 
-// Conversï¿½o de dias para segundos, minutos e horas;
+// Conversão de dias para segundos, minutos e horas;
 float daysConversions(int days, Time typeOfResult)
 {
   float result;
@@ -304,23 +301,23 @@ float daysConversions(int days, Time typeOfResult)
   return result;
 }
 
-// SEï¿½ï¿½O: CONVERSï¿½O DE UNIDADES DE FORï¿½A
+// SEÇÃO: CONVERSÃO DE UNIDADES DE FORÇA
 
-// Conversï¿½o de Kilograma-forï¿½a (kgf) para Newtons (N)
+// Conversão de Kilograma-força (kgf) para Newtons (N)
 float kilogramForceToNewton(float kgf)
 {
   return kgf * 9.80665; // 1 kgf = 9.80665 N
 }
 
-// Conversï¿½o de Newtons (N) para Kilograma-forï¿½a (kgf)
+// Conversão de Newtons (N) para Kilograma-força (kgf)
 float NewtonTokilogramForce(float N)
 {
   return N / 9.80665; // 1 N = 0.101972 kgf
 }
 
-// SEï¿½ï¿½O: MENUS DE CONVERSï¿½O
+// SEÇÃO: MENUS DE CONVERSÃO
 
-// Menu de conversï¿½o de unidades de temperatura
+// Menu de conversão de unidades de temperatura
 void temperatureMenu()
 {
   float initialDegrees;
@@ -337,6 +334,12 @@ void temperatureMenu()
 
     initialUnit = toupper(initialUnit);
 
+    if (initialUnit != 'C' && initialUnit != 'F' && initialUnit != 'K')
+    {
+      printf("Unidade de medida de temperatura não identificada!!! Tente novamente\n ");
+      break;
+    }
+
     switch (initialUnit)
     {
     case 'C':
@@ -348,24 +351,24 @@ void temperatureMenu()
         if ((finalUnit == 'K') || (finalUnit == 'k'))
         {
           i++;
-          printf("O valor em Kelvin ï¿½: %.2f\n", celciusConversions(initialDegrees, KELVIN));
+          printf("O valor em Kelvin é: %.2f\n", celciusConversions(initialDegrees, KELVIN));
         }
         else
         {
           if ((finalUnit == 'F') || (finalUnit == 'f'))
           {
             i++;
-            printf("O valor em Fahrenheit ï¿½: %.2f\n", celciusConversions(initialDegrees, FAHRENHEIT));
+            printf("O valor em Fahrenheit é: %.2f\n", celciusConversions(initialDegrees, FAHRENHEIT));
           }
           else
           {
-            printf("Unidade de medida de temperatura nï¿½o identificada!!!\n ");
+            printf("Unidade de medida de temperatura não identificada!!!\n ");
           }
         }
 
         if (i == 0)
         {
-          printf("Unidade de medida de temperatura nï¿½o identificada!!! Tente novamente\n ");
+          printf("Unidade de medida de temperatura não identificada!!! Tente novamente\n ");
         }
       } while (i == 0);
       break;
@@ -377,24 +380,24 @@ void temperatureMenu()
         scanf("%c", &finalUnit);
         if ((finalUnit == 'K') || (finalUnit == 'k'))
         {
-          printf("O valor em Kelvin ï¿½: %.2f\n", fahreheitConversions(initialDegrees, KELVIN));
+          printf("O valor em Kelvin é: %.2f\n", fahreheitConversions(initialDegrees, KELVIN));
         }
         else
         {
           if ((finalUnit == 'C') || (finalUnit == 'c'))
           {
             i++;
-            printf("O valor em Celcius ï¿½: %.2f\n", fahreheitConversions(initialDegrees, CELCIUS));
+            printf("O valor em Celcius é: %.2f\n", fahreheitConversions(initialDegrees, CELCIUS));
           }
           else
           {
-            printf("Unidade de medida de temperatura nï¿½o identificada!!!\n ");
+            printf("Unidade de medida de temperatura não identificada!!!\n ");
           }
         }
 
         if (i == 0)
         {
-          printf("Unidade de medida de temperatura nï¿½o identificada!!! Tente novamente\n ");
+          printf("Unidade de medida de temperatura não identificada!!! Tente novamente\n ");
         }
       } while (i == 0);
       break;
@@ -407,32 +410,27 @@ void temperatureMenu()
         if ((finalUnit == 'F') || (finalUnit == 'f'))
         {
           i++;
-          printf("O valor em Fahrenheit ï¿½: %.2f\n", kelvinConversions(initialDegrees, FAHRENHEIT));
+          printf("O valor em Fahrenheit é: %.2f\n", kelvinConversions(initialDegrees, FAHRENHEIT));
         }
         else
         {
           if ((finalUnit == 'C') || (finalUnit == 'c'))
           {
             i++;
-            printf("O valor em Celcius ï¿½: %.2f\n", kelvinConversions(initialDegrees, CELCIUS));
+            printf("O valor em Celcius é: %.2f\n", kelvinConversions(initialDegrees, CELCIUS));
           }
           else
           {
-            printf("Unidade de medida de temperatura nï¿½o identificada!!!\n ");
+            printf("Unidade de medida de temperatura não identificada!!!\n ");
           }
         }
 
         if (i == 0)
         {
-          printf("Unidade de medida de temperatura nï¿½o identificada!!! Tente novamente\n ");
+          printf("Unidade de medida de temperatura não identificada!!! Tente novamente\n ");
         }
       } while (i == 0);
       break;
-    }
-
-    if (initialUnit != 'C' && initialUnit != 'F' && initialUnit != 'K')
-    {
-      printf("Unidade de medida de temperatura nï¿½o identificada!!! Tente novamente\n ");
     }
 
   } while (initialUnit != 'C' && initialUnit != 'F' && initialUnit != 'K');
@@ -440,7 +438,7 @@ void temperatureMenu()
   finishMenu();
 }
 
-// Menu de conversï¿½o de unidades de tempo
+// Menu de conversão de unidades de tempo
 void timeMenu()
 {
   int inputUnit, outputUnit;
@@ -448,13 +446,13 @@ void timeMenu()
   printf("-- UNIDADES DE TEMPO --\n\n");
   do
   {
-    printf("Selecione a unidade de tempo que vocï¿½ quer converter: \n1 - Segundos\n2 - Minutos\n3 - Horas\n4 - Dias\n");
+    printf("Selecione a unidade de tempo que você quer converter: \n1 - Segundos\n2 - Minutos\n3 - Horas\n4 - Dias\n");
     inputUnit = getNumber();
 
     if (inputUnit < 0 || inputUnit > 7)
     {
       system("CLS");
-      printf("Digite uma opï¿½ï¿½o vï¿½lida! Tente novamente: \n");
+      printf("Digite uma opção válida! Tente novamente: \n");
     }
   } while (inputUnit < 1 || inputUnit > 4);
   system("CLS");
@@ -474,10 +472,10 @@ void timeMenu()
     printf("Dias\n");
     break;
   }
-  printf("Digite o valor que vocï¿½ quer converter: ");
+  printf("Digite o valor que você quer converter: ");
   scanf("%f", &value);
 
-  printf("\nSelecione a unidade de saï¿½da: \n");
+  printf("\nSelecione a unidade de saída: \n");
   do
   {
     if (inputUnit != SECONDS)
@@ -488,12 +486,12 @@ void timeMenu()
       printf("3 - Horas\n");
     if (inputUnit != DAYS)
       printf("4 - Dias\n");
-    printf("Opï¿½ï¿½o: ");
+    printf("Opção: ");
     scanf("%d", &outputUnit);
 
     if (outputUnit <= 0 || outputUnit == inputUnit || outputUnit >= 5)
     {
-      printf("Digite uma opï¿½ï¿½o valida! Tente novamente: \n");
+      printf("Digite uma opção valida! Tente novamente: \n");
     }
   } while (outputUnit <= 0 || outputUnit == inputUnit || outputUnit >= 5);
 
@@ -504,20 +502,20 @@ void timeMenu()
     {
     case MINUTES:
       result = secondsConversions(value, MINUTES);
-      printf("%.2f segundo(s) ï¿½ igual a %.2f minuto(s)", value, result);
-      addValueToHistory("%.2f segundo(s) ï¿½ igual a %.2f minuto(s)", value, result);
+      printf("%.2f segundo(s) é igual a %.2f minuto(s)", value, result);
+      addValueToHistory("%.2f segundo(s) é igual a %.2f minuto(s)", value, result);
       break;
 
     case HOURS:
       result = secondsConversions(value, HOURS);
-      printf("%.2f segundo(s) ï¿½ igual a %.4f hora(s)", value, result);
-      addValueToHistory("%.2f segundo(s) ï¿½ igual a %.2f hora(s)", value, result);
+      printf("%.2f segundo(s) é igual a %.4f hora(s)", value, result);
+      addValueToHistory("%.2f segundo(s) é igual a %.2f hora(s)", value, result);
       break;
 
     case DAYS:
       result = secondsConversions(value, DAYS);
-      printf("%.2f segundo(s) ï¿½ igual a %f dias(s)", value, result);
-      addValueToHistory("%.2f segundo(s) ï¿½ igual a %.2f dias(s)", value, result);
+      printf("%.2f segundo(s) é igual a %f dias(s)", value, result);
+      addValueToHistory("%.2f segundo(s) é igual a %.2f dias(s)", value, result);
       break;
     }
     break;
@@ -527,20 +525,20 @@ void timeMenu()
     {
     case SECONDS:
       result = minutesConversions(value, SECONDS);
-      printf("%.2f minuto(s) ï¿½ igual a %.2f segundo(s)", value, result);
-      addValueToHistory("%.2f minuto(s) ï¿½ igual a %.2f segundo(s)", value, result);
+      printf("%.2f minuto(s) é igual a %.2f segundo(s)", value, result);
+      addValueToHistory("%.2f minuto(s) é igual a %.2f segundo(s)", value, result);
       break;
 
     case HOURS:
       result = minutesConversions(value, HOURS);
-      printf("%.2f minuto(s) ï¿½ igual a %.2f hora(s)", value, result);
-      addValueToHistory("%.2f minuto(s) ï¿½ igual a %.2f hora(s)", value, result);
+      printf("%.2f minuto(s) é igual a %.2f hora(s)", value, result);
+      addValueToHistory("%.2f minuto(s) é igual a %.2f hora(s)", value, result);
       break;
 
     case DAYS:
       result = minutesConversions(value, DAYS);
-      printf("%.2f minuto(s) ï¿½ igual a %.2f dias(s)", value, result);
-      addValueToHistory("%.2f minuto(s) ï¿½ igual a %.2f dias(s)", value, result);
+      printf("%.2f minuto(s) é igual a %.2f dias(s)", value, result);
+      addValueToHistory("%.2f minuto(s) é igual a %.2f dias(s)", value, result);
       break;
     }
     break;
@@ -550,20 +548,20 @@ void timeMenu()
     {
     case SECONDS:
       result = hoursConversions(value, SECONDS);
-      printf("%.2f hora(s) ï¿½ igual a %.2f segundo(s)", value, result);
-      addValueToHistory("%.2f hora(s) ï¿½ igual a %.2f segundo(s)", value, result);
+      printf("%.2f hora(s) é igual a %.2f segundo(s)", value, result);
+      addValueToHistory("%.2f hora(s) é igual a %.2f segundo(s)", value, result);
       break;
 
     case MINUTES:
       result = hoursConversions(value, MINUTES);
-      printf("%.2f hora(s) ï¿½ igual a %.2f minutos(s)", value, result);
-      addValueToHistory("%.2f hora(s) ï¿½ igual a %.2f minutos(s)", value, result);
+      printf("%.2f hora(s) é igual a %.2f minutos(s)", value, result);
+      addValueToHistory("%.2f hora(s) é igual a %.2f minutos(s)", value, result);
       break;
 
     case DAYS:
       result = hoursConversions(value, DAYS);
-      printf("%.2f hora(s) ï¿½ igual a %.2f dias(s)", value, result);
-      addValueToHistory("%.2f hora(s) ï¿½ igual a %.2f dias(s)", value, result);
+      printf("%.2f hora(s) é igual a %.2f dias(s)", value, result);
+      addValueToHistory("%.2f hora(s) é igual a %.2f dias(s)", value, result);
       break;
     }
     break;
@@ -573,46 +571,46 @@ void timeMenu()
     {
     case SECONDS:
       result = daysConversions(value, SECONDS);
-      printf("%.2f dia(s) ï¿½ igual a %.2f segundo(s)", value, result);
-      addValueToHistory("%.2f dia(s) ï¿½ igual a %.2f segundo(s)", value, result);
+      printf("%.2f dia(s) é igual a %.2f segundo(s)", value, result);
+      addValueToHistory("%.2f dia(s) é igual a %.2f segundo(s)", value, result);
       break;
 
     case MINUTES:
       result = daysConversions(value, MINUTES);
-      printf("%.2f dia(s) ï¿½ igual a %.2f minutos(s)", value, result);
-      addValueToHistory("%.2f dia(s) ï¿½ igual a %.2f minutos(s)", value, result);
+      printf("%.2f dia(s) é igual a %.2f minutos(s)", value, result);
+      addValueToHistory("%.2f dia(s) é igual a %.2f minutos(s)", value, result);
       break;
 
     case HOURS:
       result = daysConversions(value, HOURS);
-      printf("%.2f dia(s) ï¿½ igual a %.2f horas(s)", value, result);
-      addValueToHistory("%.2f dia(s) ï¿½ igual a %.2f horas(s)", value, result);
+      printf("%.2f dia(s) é igual a %.2f horas(s)", value, result);
+      addValueToHistory("%.2f dia(s) é igual a %.2f horas(s)", value, result);
       break;
     }
     break;
   }
 }
 
-// Menu de conversï¿½o de unidades de forï¿½a
+// Menu de conversão de unidades de força
 void forceMenu()
 {
   int option;
   float result, value;
 
-  printf("-- UNIDADES DE FORï¿½A --\n\n");
+  printf("-- UNIDADES DE FORÇA --\n\n");
   do
   {
-    printf("Selecione a conversï¿½o que vocï¿½ deseja fazer: \n1 - Kilograma-forï¿½a(kgf) para Newton(N)\n2 - Newton(N) para Kilograma-forï¿½a(kgf)\n");
+    printf("Selecione a conversão que você deseja fazer: \n1 - Kilograma-força(kgf) para Newton(N)\n2 - Newton(N) para Kilograma-força(kgf)\n");
     option = getNumber();
 
     if (option < 1 || option > 2)
     {
       system("CLS");
-      printf("Digite uma opï¿½ï¿½o valida! Tente novamente: \n");
+      printf("Digite uma opção valida! Tente novamente: \n");
     }
   } while (option < 1 || option > 2);
 
-  printf("Digite o valor que vocï¿½ deseja converter: ");
+  printf("Digite o valor que você deseja converter: ");
   scanf("%f", &value);
 
   switch (option)
@@ -625,14 +623,14 @@ void forceMenu()
     break;
   }
 
-  printf("RESULTADO: \n%.3f kilograma-forï¿½a(s) ï¿½ igual a %f newton(s)", value, result);
+  printf("RESULTADO: \n%.3f kilograma-força(s) é igual a %f newton(s)", value, result);
 }
 
 // Menu do historico de conversï¿½es
 void historyMenu()
 {
   int option;
-  printf(" -- HISTORICO DE CONVERSï¿½ES --\n\n");
+  printf(" -- HISTORICO DE CONVERSÕES --\n\n");
   readHistory();
   do
   {
@@ -641,7 +639,7 @@ void historyMenu()
     if (option < 1 || option > 2)
     {
       system("CLS");
-      printf("Digite uma opï¿½ï¿½o valida! Tente novamente: \n");
+      printf("Digite uma opção valida! Tente novamente: \n");
     }
   } while (option < 1 || option > 2);
   switch (option)
@@ -665,24 +663,24 @@ int main()
 
   do
   {
-    printf(" -- CONVERSï¿½O DE UNIDADES --\n\n");
+    printf(" -- CONVERSÂO DE UNIDADES --\n\n");
 
-    printf("Bem vindo ao sistema de conversï¿½o de unidades\n");
-    printf("Selecione os tipos de unidades que vocï¿½ deseja converter: \n");
+    printf("Bem vindo ao sistema de conversão de unidades\n");
+    printf("Selecione os tipos de unidades que você deseja converter: \n");
 
     do
     {
       menu(&option); // Exibe o menu principal
       system("CLS"); // Limpa a tela
 
-      if (option < 0 || option > 8) // Validaï¿½ï¿½o da opï¿½ï¿½o selecionada para imprimir uma mensagem de erro
+      if (option < 0 || option > 8) // Validação da opção selecionada para imprimir uma mensagem de erro
       {
         system("CLS");
-        printf("Digite uma opï¿½ï¿½o vï¿½lida e tente novamente: \n");
+        printf("Digite uma opção válida e tente novamente: \n");
       }
-    } while (option < 0 || option > 8); // Validaï¿½ï¿½o da opï¿½ï¿½o selecionada
+    } while (option < 0 || option > 8); // Validação da opção selecionada
 
-    // Verifica qual opï¿½ï¿½o foi selecionada e chama o menu correspondente
+    // Verifica qual opção foi selecionada e chama o menu correspondente
     if (option == TIME)
     {
       timeMenu();
@@ -697,9 +695,9 @@ int main()
     }
     else if (option == 7)
     {
-      historyMenu(); // Exibe o histï¿½rico de conversÃµes
+      historyMenu(); // Exibe o histórico de conversÃµes
     }
-  } while (option != 8); // Encerra o programa quando a opï¿½ï¿½o Sair for selecionada
+  } while (option != 8); // Encerra o programa quando a opção Sair for selecionada
 
   return 0;
 }
