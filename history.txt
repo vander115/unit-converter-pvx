@@ -1,0 +1,3 @@
+23,00 graus Celsius é igual a 296,15 graus Kelvin
+25,00 graus Celsius é igual a 298,15 graus Kelvin
+60,00 segundo(s) � igual a 1,00 minuto(s)
