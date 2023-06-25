@@ -1,3 +1,2 @@
-23,00 graus Celsius Ã© igual a 296,15 graus Kelvin
-25,00 graus Celsius Ã© igual a 298,15 graus Kelvin
-60,00 segundo(s) ï¿½ igual a 1,00 minuto(s)
+56,000 graus Celsius é igual a 329,150 graus Kelvin
+80,000 quilômetro(s) é igual a 49,710 milha(s)
