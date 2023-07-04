@@ -1,5 +1,6 @@
 <h1 align="center">
-<img width="100%" alt="BingoJS" src="https://github.com/vander115/unit-converter-pvx/assets/101757815/8c5d7532-e76b-40d3-8d8e-4eb69d7da4b2">
+<img width="100%" alt="BingoJS" src="https://github.com/vander115/unit-converter-pvx/assets/101757815/5d36037b-f747-4807-b13d-5d4cf146daef">
+
 </h1>
 
 <h3 align="center">
@@ -39,7 +40,7 @@ Tecnologias que utilizamos no projeto
 
 <div align="center"> 
   <div style="display: inline_block"><br>
-  <img align="center" alt="C icon" title="C" height="56" width="56" src="https://github.com/vander115/unit-converter-pvx/assets/101757815/4787a3c1-a31a-4796-bc6e-d06f9f7dcf24">
+  <img align="center" alt="C icon" title="C" height="56" width="56" src="https://github.com/vander115/unit-converter-pvx/assets/101757815/34f51fa6-d0c7-433a-b59d-9cfab372bb68">
     </div>
 </div>
 
