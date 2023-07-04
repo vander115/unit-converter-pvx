@@ -34,7 +34,7 @@ Ele converte as principais unidades de medidas do cotidiano e armazena os result
 - Guilherme Meneses Xavier Abreu Cardoso
 - José Vanderlei Furtuna Tomé
 
-## 🚀 Technologies
+## 🚀 Tecnologias
 
 Tecnologias que utilizamos no projeto
 
